@@ -23,14 +23,6 @@ angular.module('schemaForm').factory('sfValidator', [function() {
       return {valid: true};
     }
 
-    // Input of type text and textareas will give us a viewValue of ''
-    // when empty, this is a valid value in a schema and does not count as something
-    // that breaks validation of 'required'. But for our own sanity an empty field should
-    // not validate if it's required.
-    if (value === '') {
-      value = undefined;
-    }
-
     // Numbers fields will give a null value, which also means empty field
     if (form.type === 'number' && value === null) {
       value = undefined;
