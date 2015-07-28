@@ -1033,7 +1033,7 @@ angular.module('schemaForm').provider('schemaForm',
     if (schema.description) { f.description = schema.description; }
     if (options.required === true || schema.required === true) { f.required = true; }
     if (schema.maxLength) { f.maxlength = schema.maxLength; }
-    if (schema.minLength) { f.minlength = schema.maxLength; }
+    if (schema.minLength) { f.minlength = schema.minLength; }
     if (schema.readOnly || schema.readonly) { f.readonly  = true; }
     if (schema.minimum) { f.minimum = schema.minimum + (schema.exclusiveMinimum ? 1 : 0); }
     if (schema.maximum) { f.maximum = schema.maximum - (schema.exclusiveMaximum ? 1 : 0); }
@@ -1449,14 +1449,6 @@ angular.module('schemaForm').factory('sfValidator', [function() {
 
     if (!schema) {
       return {valid: true};
-    }
-
-    // Input of type text and textareas will give us a viewValue of ''
-    // when empty, this is a valid value in a schema and does not count as something
-    // that breaks validation of 'required'. But for our own sanity an empty field should
-    // not validate if it's required.
-    if (value === '') {
-      value = undefined;
     }
 
     // Numbers fields will give a null value, which also means empty field
